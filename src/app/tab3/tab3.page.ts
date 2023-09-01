@@ -3,6 +3,8 @@ import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { IonItemGroup } from '@ionic/angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatabaseService } from '../database.service';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab3',
@@ -18,9 +20,10 @@ export class Tab3Page {
   list: any[] = [];
   phones: string[] = [];
   addForm: FormGroup;
+  imageUrl: any;
 
 
-  constructor(private db: DatabaseService) {
+  constructor(private db: DatabaseService, private router: Router) {
     this.addForm = new FormGroup({
       first_name: new FormControl('', Validators.required),
       last_name: new FormControl('', Validators.required),
@@ -38,9 +41,9 @@ export class Tab3Page {
           if (a.first_name > b.first_name) { return 1; }
           return 0;
         });
-    
+
         let first = null;
-    
+
         for (let i = 0; i < sorted.length; i++) {
           const contact = sorted[i];
           if (!first || first != contact.first_name[0]) {
@@ -51,7 +54,7 @@ export class Tab3Page {
         }
 
       })
-      console.log('res', this.data);
+    console.log('res', this.data);
 
 
     // let number: any = localStorage.getItem('contacts');
@@ -113,6 +116,24 @@ export class Tab3Page {
       this.db.postDataToDB(form).subscribe(result => console.log('add', result));
       this.addForm.reset();
     }
+  }
+
+  addPhoto = async () => {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Prompt,
+      saveToGallery: true,
+    });
+    this.imageUrl = 'data: image/jpeg;base64,' + image.base64String;
+    console.log('url', this.imageUrl);
+  }
+
+  getContact(user: any) {
+    localStorage.setItem('selectedContact', JSON.stringify(user));
+    console.log('user', user);
+    this.router.navigate(['/contact-preview']);
   }
 
 }

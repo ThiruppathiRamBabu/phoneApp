@@ -40,7 +40,7 @@
           </ion-label>
         </ion-item-divider>
 
-        <ion-item *ngFor="let user of item.users">
+        <ion-item *ngFor="let user of item.users" (click)="getContact(user)" >
           <ion-label>
             <b>{{user.first_name}} {{user.last_name}}</b>
           </ion-label>
@@ -72,9 +72,9 @@
     <ion-content>
       <div class="avatar-container">
         <ion-avatar>
-          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          <img [src]="imageUrl || 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
         </ion-avatar>
-        <ion-chip><b>Add Photo</b></ion-chip>
+        <ion-chip (click)="addPhoto()"><b>Add Photo</b></ion-chip>
       </div>
       <form [formGroup]="addForm">
         <ion-list style="margin-top: 20px;">

@@ -6,7 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  favList: any[] = [];
 
-  constructor() {}
+  constructor() {
+    let number: any = localStorage.getItem('favourit');
+    const item: any = JSON.parse(number);
+    if (item) {
+      item.forEach((element: any) => {
+        this.favList.push(element);
+      });
+      console.log('favList', this.favList)
+    }
+  }
 
 }

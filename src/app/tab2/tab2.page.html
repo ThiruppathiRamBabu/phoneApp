@@ -21,5 +21,13 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-item *ngFor="let recent of recents">
+    <ion-icon slot="start"></ion-icon>
+    <ion-label>
+      <h2>{{recent.first_name}} {{recent.last_name}}</h2>
+      <p><ion-icon name="call"></ion-icon> mobile</p>
+    </ion-label>
+    <ion-icon name="information-circle-outline" slot="end" color="primary"></ion-icon>
+  </ion-item>
   
 </ion-content>

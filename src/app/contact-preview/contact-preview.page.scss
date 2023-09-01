@@ -1,0 +1,37 @@
+ion-content{
+    --ion-background-color: #F2F1F6;
+
+    ion-list {
+        --ion-background-color: #ffffff;
+    }
+
+    ion-item {
+        --ion-background-color: #ffffff;
+
+    }
+}
+
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    ion-avatar {
+        height: 170px;
+        width: 170px;
+        margin-bottom: 20px;
+        font-size: 90px;
+    }
+
+    ion-text {
+        font-size: 20px;
+    }
+}
+
+ion-avatar{
+    background-color: rgb(151, 150, 150);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
