@@ -22,7 +22,7 @@
         {{ list.first_name.charAt(0) | uppercase }}
       </ng-container>
     </ion-avatar>
-    <ion-text><b>{{list.first_name}}</b></ion-text>
+    <ion-text><b>{{list.first_name}} {{list.last_name}}</b></ion-text>
     <div style="margin-top: 20px;">
       <ion-button color="medium" class="ion-no-padding">
         <ion-grid style="width: 80px;">
@@ -38,7 +38,7 @@
           </ion-row>
         </ion-grid>
       </ion-button>
-      <ion-button color="medium" class="ion-no-padding" (click)="call(list)">
+      <ion-button color="medium" class="ion-no-padding" (click)="call(list)" (click)="setOpen(true)">
         <ion-grid style="width: 80px;">
           <ion-row justify-content-center align-items-center>
             <ion-col>
@@ -142,5 +142,22 @@
       <ion-label color="danger"> Block this Caller</ion-label>
     </ion-item>
   </ion-list>
+
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-content class="ion-padding" *ngFor="let list of lists">
+        <div class="avatar-container">
+          <ion-avatar>
+            <ng-container>
+              {{ list.first_name.charAt(0) | uppercase }}
+            </ng-container>
+          </ion-avatar>
+          <ion-text><b>{{list.first_name}} {{list.last_name}}</b></ion-text>
+          <ion-text color="primary">{{list.ph_number}}</ion-text>
+          <ion-icon name="close-circle" size="large" slot="icon-only" color="danger" (click)="setOpen(false)"></ion-icon>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 
 </ion-content>

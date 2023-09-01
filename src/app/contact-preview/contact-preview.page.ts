@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactPreviewPage {
   lists: any[] = [];
+  isModalOpen = false;
+
   constructor() {
     let data: any = localStorage.getItem('selectedContact');
     const contact = JSON.parse(data);
@@ -27,6 +29,10 @@ export class ContactPreviewPage {
     phone.push(item);
     localStorage.setItem('call', JSON.stringify(phone));
     console.log('call', phone);
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
   }
 }
 
