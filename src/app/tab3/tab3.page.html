@@ -1,17 +1,174 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<div class="ion-page" #page>
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-buttons slot="start">
+        <ion-icon name="chevron-back" size="large" color="primary"></ion-icon>
+        <ion-text color="primary">Lists</ion-text>
+      </ion-buttons>
+      <ion-title>
+        Contacts
+      </ion-title>
+      <ion-buttons slot="end" id="open-modal">
+        <ion-icon name="add" size="large" color="primary"></ion-icon>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
-</ion-content>
+  <ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Contacts</ion-title>
+      </ion-toolbar>
+      <ion-toolbar>
+        <ion-searchbar show-cancel-button="focus" show-clear-button="focus"></ion-searchbar>
+        <div class="line ion-padding-start"></div>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-item lines="none" class="avatar">
+      <ion-avatar slot="start">
+        <img src="../../assets/ram.png" />
+      </ion-avatar>
+      <ion-label> N. Thiru </ion-label>
+    </ion-item>
+
+    <ion-list>
+      <ion-item-group *ngFor="let item of data">
+        <ion-item-divider sticky color="light">
+          <ion-label style="font-weight: 50;">
+            {{item.key}}
+          </ion-label>
+        </ion-item-divider>
+
+        <ion-item *ngFor="let user of item.users">
+          <ion-label>
+            <b>{{user.first_name}} {{user.last_name}}</b>
+          </ion-label>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+
+    <app-alphabet-scroll (letterSelected)="scrollToLetter($event)"
+      (scrollingLetter)="letterScrollActive($event)"></app-alphabet-scroll>
+
+  </ion-content>
+</div>
+
+<!-- Add Contacts Modal -->
+
+<ion-modal class="modal" #modal trigger="open-modal" [canDismiss]="canDismiss" [presentingElement]="page">
+  <ng-template>
+    <ion-header collapse="fade">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="modal.dismiss()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title>New Contacts</ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="medium" (click)="addContact()" (click)="modal.dismiss()">Done</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div class="avatar-container">
+        <ion-avatar>
+          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        </ion-avatar>
+        <ion-chip><b>Add Photo</b></ion-chip>
+      </div>
+      <form [formGroup]="addForm">
+        <ion-list style="margin-top: 20px;">
+          <ion-item>
+            <ion-input placeholder="First name" formControlName="first_name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="Last name" formControlName="last_name"></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-input placeholder="Company"></ion-input>
+          </ion-item>
+        </ion-list>
+
+        <div style="margin-top: 40px;">
+          <ion-list>
+            <ion-item-sliding *ngFor="let phone of phones" #ionItemSliding>
+              <ion-item>
+                <ion-icon name="remove-circle" slot="start" color="danger" (click)="ionItemSliding.close()"></ion-icon>
+                <ion-label color="primary">mobile</ion-label><ion-icon size="small"
+                  name="chevron-forward-outline"></ion-icon>
+                <ion-input placeholder="phone" formControlName="number"></ion-input>
+              </ion-item>
+              <ion-item-options>
+                <ion-item-option color="danger" (click)="removePhone(phone)">Delete</ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+            <ion-item lines="full" (click)="addPhone()">
+              <ion-icon name="add-circle" color="success" slot="start"></ion-icon>
+              <ion-label>add phone</ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <ion-item lines="full" style="margin-top: 40px;">
+          <ion-icon name="add-circle" color="success" slot="start"></ion-icon>
+          <ion-label>add email</ion-label>
+        </ion-item>
+
+        <ion-item lines="full" style="margin-top: 40px;">
+          <ion-icon name="add-circle" color="success" slot="start"></ion-icon>
+          <ion-label>add pronouns</ion-label>
+        </ion-item>
+
+        <ion-item lines="full" style="margin-top: 40px;" button>
+          <ion-label>Ringtone</ion-label>
+          <p slot="start">Default</p>
+        </ion-item>
+
+        <ion-item lines="full" style="margin-top: 40px;" button>
+          <ion-label>Text Tone</ion-label>
+          <p slot="start">Default</p>
+        </ion-item>
+
+        <ion-item lines="full" style="margin-top: 40px;">
+          <ion-icon name="add-circle" color="success" slot="start"></ion-icon>
+          <ion-label>add url</ion-label>
+        </ion-item>
+
+        <ion-item lines="full" style="margin-top: 40px;">
+          <ion-icon name="add-circle" color="success" slot="start"></ion-icon>
+          <ion-label>add address</ion-label>
+        </ion-item>
+
+        <ion-item lines="full" style="margin-top: 40px;">
+          <ion-icon name="add-circle" color="success" slot="start"></ion-icon>
+          <ion-label>add birthday</ion-label>
+        </ion-item>
+
+        <ion-item lines="full" style="margin-top: 40px;">
+          <ion-icon name="add-circle" color="success" slot="start"></ion-icon>
+          <ion-label>add date</ion-label>
+        </ion-item>
+
+        <ion-item lines="full" style="margin-top: 40px;">
+          <ion-icon name="add-circle" color="success" slot="start"></ion-icon>
+          <ion-label>add related name</ion-label>
+        </ion-item>
+
+        <ion-item lines="full" style="margin-top: 40px;">
+          <ion-icon name="add-circle" color="success" slot="start"></ion-icon>
+          <ion-label>add social profile</ion-label>
+        </ion-item>
+
+        <ion-item lines="full" style="margin-top: 40px;">
+          <ion-icon name="add-circle" color="success" slot="start"></ion-icon>
+          <ion-label>add instant message</ion-label>
+        </ion-item>
+
+        <ion-item lines="full" style="margin-top: 40px;">
+          <ion-label>Note</ion-label>
+          <ion-note></ion-note>
+        </ion-item>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

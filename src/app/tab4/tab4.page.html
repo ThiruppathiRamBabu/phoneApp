@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title></ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-item lines="none">
+      <ion-input [(ngModel)]="mobile"></ion-input>
+    </ion-item>
+
+    <div class="keyborad">
+      <div class="key" (click)="add(1)" style="padding-top: 0px;">1</div>
+      <div class="key" (click)="add(2)">2 <p class="key-label">ABC</p> </div>
+      <div class="key" (click)="add(3)">3 <p class="key-label">DEF</p> </div>
+
+      <div class="key" (click)="add(4)">4 <p class="key-label">GHI</p> </div>
+      <div class="key" (click)="add(5)">5 <p class="key-label">JKL</p> </div>
+      <div class="key" (click)="add(6)">6 <p class="key-label">MNO</p> </div>
+
+      <div class="key" (click)="add(7)">7 <p class="key-label">PQRS</p> </div>
+      <div class="key" (click)="add(8)">8 <p class="key-label">TUV</p> </div>
+      <div class="key" (click)="add(9)">9 <p class="key-label">WXYZ</p> </div>
+
+      <div class="key" (click)="add('*')">*</div>
+      <div class="key" (click)="add(0)">0<p class="key-label">+</p> </div>
+      <div class="key" (click)="add('#')" style="padding-top: 0px;">#</div>
+
+      <div class="key" style="background-color: white; box-shadow: none;"></div>
+      <div class="key" style="background-color: rgb(8, 192, 8);padding-top: 0px;">
+        <ion-icon name="call" color="light"></ion-icon>
+      </div>
+      <div class="key" style="background-color: white; box-shadow: none;padding-top: 0px;">
+        <ion-icon *ngIf="mobile !== ''" name="backspace-outline" (click)="del()"></ion-icon>
+      </div>
+
+    </div>
+  </ion-card>
+
+</ion-content>
