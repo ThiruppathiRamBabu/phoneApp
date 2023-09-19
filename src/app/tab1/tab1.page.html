@@ -19,7 +19,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-item *ngFor="let list of favList">
+  <ion-item *ngFor="let list of favList" href="tel:{{list.ph_number}}">
     <ion-avatar slot="start">
       <ng-container>
         {{ list.first_name.charAt(0) | uppercase }}

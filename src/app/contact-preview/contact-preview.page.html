@@ -38,6 +38,7 @@
           </ion-row>
         </ion-grid>
       </ion-button>
+      <a href="tel:{{list.ph_number}}">
       <ion-button color="medium" class="ion-no-padding" (click)="call(list)" (click)="setOpen(true)">
         <ion-grid style="width: 80px;">
           <ion-row justify-content-center align-items-center>
@@ -47,11 +48,12 @@
           </ion-row>
           <ion-row justify-content-center align-items-center>
             <ion-col>
-              mobile
+              call
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-button>
+    </a>
       <ion-button color="medium" class="ion-no-padding">
         <ion-grid style="width: 80px;">
           <ion-row justify-content-center align-items-center>
@@ -85,7 +87,7 @@
 
 
   <ion-list style="margin-top: 20px;" [inset]="true" class="ion-padding">
-    <ion-item lines="none">
+    <ion-item >
       <ion-avatar slot="start">
         <ng-container>
           {{ list.first_name.charAt(0) | uppercase }}
@@ -99,7 +101,7 @@
     <ion-item lines="none">
       <ion-label>
         <h3>mobile</h3>
-        <ion-text color="primary">{{list.ph_number}}</ion-text>
+        <a href="tel:{{list.ph_number}}">{{list.ph_number}}</a>
       </ion-label>
     </ion-item>
   </ion-list>
@@ -143,7 +145,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-modal [isOpen]="isModalOpen">
+  <!-- <ion-modal [isOpen]="isModalOpen">
     <ng-template>
       <ion-content class="ion-padding" *ngFor="let list of lists">
         <div class="avatar-container">
@@ -158,6 +160,6 @@
         </div>
       </ion-content>
     </ng-template>
-  </ion-modal>
+  </ion-modal> -->
 
 </ion-content>

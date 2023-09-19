@@ -133,7 +133,8 @@ export class Tab3Page {
   getContact(user: any) {
     localStorage.setItem('selectedContact', JSON.stringify(user));
     console.log('user', user);
-    this.router.navigate(['/contact-preview']);
+    const contact = encodeURIComponent(user.first_name);
+    this.router.navigateByUrl(`/tabs/tab3/${contact}`);
   }
 
 }

@@ -36,14 +36,14 @@
       <div class="key" (click)="add('#')" style="padding-top: 0px;">#</div>
 
       <div class="key" style="background-color: white; box-shadow: none;"></div>
-      <div class="key" style="background-color: rgb(8, 192, 8);padding-top: 0px;">
+      <a [href]="getTelLink()"><div class="key" style="background-color: rgb(8, 192, 8);padding-top: 0px;">
         <ion-icon name="call" color="light"></ion-icon>
-      </div>
+      </div></a>
       <div class="key" style="background-color: white; box-shadow: none;padding-top: 0px;">
         <ion-icon *ngIf="mobile !== ''" name="backspace-outline" (click)="del()"></ion-icon>
       </div>
-
+      
     </div>
   </ion-card>
-
+<a [href]="getTelLink()">{{mobile}}</a>
 </ion-content>
